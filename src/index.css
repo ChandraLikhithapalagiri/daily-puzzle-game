@@ -1,3 +1,129 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * NOTE: Google Fonts are loaded via <link> in index.html — NOT here.
+ * @import in CSS is render-blocking and kills Lighthouse performance score.
+ * The <link> tags in <head> load fonts in parallel with other resources.
+ */
+
+/* ── CSS custom properties ───────────────────────────────────────────────── */
+:root {
+  --primary:       #414BEA;
+  --primary-dark:  #190482;
+  --primary-light: #D9E2FF;
+  --accent:        #F05537;
+  --violet:        #7752FE;
+  --surface:       #F0F2FF;
+  --card:          #FFFFFF;
+  --border:        #E4E8FF;
+  --text:          #1A1A2E;
+  --text-muted:    #4A4A6A;
+  --text-subtle:   #9CA3AF;
+  --success:       #10B981;
+  --font-base:     'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     16px;
+  --radius-xl:     20px;
+  --shadow-card:   0 1px 3px rgba(65,75,234,0.06), 0 4px 16px rgba(65,75,234,0.08);
+  --shadow-float:  0 8px 32px rgba(65,75,234,0.16), 0 2px 8px rgba(65,75,234,0.08);
+}
+
+/* ── Base resets ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Removed text-rendering: optimizeLegibility — high CPU cost, hurts perf score */
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-base);
+  min-height: 100vh;
+}
+
+/* Remove number input spinners */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* ── Utility animation classes ───────────────────────────────────────────── */
+.fade-in   { animation: fadeIn  0.25s ease forwards; }
+.slide-up  { animation: slideUp 0.3s  ease forwards; }
+.scale-in  { animation: scaleIn 0.2s  ease forwards; }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .slide-up, .scale-in { animation: none; }
+  .skeleton { animation: none; }
+}
+
+/* Staggered children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 50ms; }
+.stagger > *:nth-child(3) { animation-delay: 100ms; }
+.stagger > *:nth-child(4) { animation-delay: 150ms; }
+.stagger > *:nth-child(5) { animation-delay: 200ms; }
+.stagger > *:nth-child(6) { animation-delay: 250ms; }
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg, #f0f2ff 25%, #e4e8ff 50%, #f0f2ff 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Root reset ──────────────────────────────────────────────────────────── */
+#root {
+  max-width: none;
+  margin:    0;
+  padding:   0;
+  text-align: left;
+}
+
+/* ── Images: prevent layout shift (CLS) ─────────────────────────────────── */
+img {
+  display: block;
+  max-width: 100%;
+}

@@ -2,9 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>daily-puzzle-game</title>
+    <meta name="description" content="Logic Looper — One adaptive puzzle a day. Sharpen your logic, build your streak, track every gain. By Bluestock Fintech." />
+    <meta name="theme-color" content="#414BEA" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Logic Looper" />
+
+    <!-- Open Graph -->
+    <meta property="og:title"       content="Logic Looper — Daily Puzzle" />
+    <meta property="og:description" content="One adaptive puzzle a day. Sharpen your logic, build your streak." />
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Bluestock Fintech" />
+
+    <title>Logic Looper — Daily Puzzle</title>
+
+    <!-- Step 1: Preconnect to font origins BEFORE any font request -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!--
+      Step 2: Load fonts via <link> in HTML (NOT @import in CSS).
+      - Only 3 weights of DM Sans (400, 600, 700) — not all 7
+      - Only 2 weights of JetBrains Mono (400, 600)
+      - display=swap prevents invisible text during font load
+    -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    />
+
+    <!-- Preload Bluestock logo — used immediately in navbar on every page -->
+    <link
+      rel="preload"
+      href="https://bluestock.in/static/assets/logo/logo.webp"
+      as="image"
+      type="image/webp"
+    />
+
+    <!-- Web App Manifest (improves PWA + Lighthouse Best Practices) -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- DNS prefetch for bluestock.in logo (used in navbar on every page) -->
+    <link rel="dns-prefetch" href="https://bluestock.in" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>" />
   </head>
   <body>
     <div id="root"></div>
